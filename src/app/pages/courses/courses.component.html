@@ -22,6 +22,7 @@
         <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
         <th>Teachers</th>
         <th pSortableColumn="coef">Coef <p-sortIcon field="coef"></p-sortIcon></th>
+        <th style="width: 8rem"></th>
       </tr>
       <tr>
 
@@ -49,10 +50,8 @@
             </p-multiSelect>
           </ng-template>
         </p-columnFilter>
-
-
-        <th style="width: 3rem"></th>
-
+        <th></th>
+        <th style="width: 8rem"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-course>
@@ -90,22 +89,11 @@
         <td>
           <p-inputNumber [(ngModel)]="editedCourse.coef" mode="decimal"></p-inputNumber>
         </td>
-        <td style="width: 3rem">
-          <button pButton type="button" icon="pi pi-check" class="p-button-rounded p-button-success" (click)="stopEdition()"></button>
+        <td style="width: 8rem">
+          <button pButton type="button" icon="pi pi-check" class="p-button-rounded p-button-success" (click)="stopEdition()" style="margin-right: 0.5rem;"></button>
           <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteCourse()"></button>
         </td>
       </tr>
-
     </ng-template>
-    <ng-template pTemplate="summary">
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-        </td>
-      </tr>
-  </ng-template>
   </p-table>
 </div>
