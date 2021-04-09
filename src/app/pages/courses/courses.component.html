@@ -1,0 +1,111 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast></p-toast>
+
+<div class="card">
+  <p-table #table [value]="data"
+    [globalFilterFields]="['module','name','teachers']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex">
+        <span class="p-input-icon-left p-ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText #field type="text" (input)="table.filterGlobal(field.value, 'contains')" placeholder="Search keyword" />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="module">
+          Module
+          <p-sortIcon field="module"></p-sortIcon>
+        </th>
+        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th>Teachers</th>
+        <th pSortableColumn="coef">Coef <p-sortIcon field="coef"></p-sortIcon></th>
+      </tr>
+      <tr>
+
+        <p-columnFilter field="module" matchMode="equals" [showMenu]="false">
+					<ng-template pTemplate="filter" let-value let-filter="filterCallback">
+						<p-dropdown [ngModel]="value" [options]="modules" (onChange)="filter($event.value)"
+							placeholder="Any" [showClear]="true">
+							<ng-template let-option pTemplate="item">
+								<span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+							</ng-template>
+						</p-dropdown>
+					</ng-template>
+				</p-columnFilter>
+        <th></th>
+
+        <p-columnFilter field="teachers" matchMode="contains" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect [ngModel]="value" [options]="teachers" placeholder="Any"
+              (onChange)="filter($event.value)" optionLabel="name">
+              <ng-template let-option pTemplate="item">
+                <div class="p-multiselect-representative-option">
+                  <span class="p-ml-1">{{option.name}}</span>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+
+
+        <th style="width: 3rem"></th>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-course>
+      <tr *ngIf="editedCourse === null || editedCourse.id !== course.id">
+        <td>{{course.moduleText}}</td>
+        <td>{{course.name}}</td>
+        <td>
+          <span *ngFor="let teacher of course.teachers">{{teacher.name + '\n'}}</span>
+        </td>
+        <td>{{course.coef}}</td>
+        <td>
+          <button
+            pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-bookmark"
+            (click)="edit(course)" [disabled]="editedCourse !== null"
+          ></button>
+        </td>
+      </tr>
+
+      <tr *ngIf="editedCourse !== null && editedCourse.id === course.id">
+        <td>
+          <p-dropdown #moduleDropdown [options]="modules" [(ngModel)]="editedCourse.module">
+            <ng-template let-option pTemplate="item">
+              <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+            </ng-template>
+          </p-dropdown>
+        </td>
+        <td>
+          <input type="text" pInputText [(ngModel)]="course.name">
+        </td>
+        <td>
+          <p-multiSelect [options]="teachers" placeholder="Any" [(ngModel)]="editedCourse.teachers"
+            optionLabel="name">
+          </p-multiSelect>
+        </td>
+        <td>
+          <p-inputNumber [(ngModel)]="editedCourse.coef" mode="decimal"></p-inputNumber>
+        </td>
+        <td style="width: 3rem">
+          <button pButton type="button" icon="pi pi-check" class="p-button-rounded p-button-success" (click)="stopEdition()"></button>
+          <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteCourse()"></button>
+        </td>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+        </td>
+      </tr>
+  </ng-template>
+  </p-table>
+</div>
