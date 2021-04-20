@@ -1,6 +1,3 @@
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<p-toast></p-toast>
-
 <div class="card">
   <p-table #table [value]="data"
     [globalFilterFields]="['module','name','teachers']"
@@ -15,49 +12,51 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
+        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
         <th pSortableColumn="module">
           Module
           <p-sortIcon field="module"></p-sortIcon>
         </th>
-        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
         <th>Teachers</th>
         <th pSortableColumn="coef">Coef <p-sortIcon field="coef"></p-sortIcon></th>
         <th style="width: 8rem"></th>
       </tr>
       <tr>
-
-        <p-columnFilter field="module" matchMode="equals" [showMenu]="false">
-					<ng-template pTemplate="filter" let-value let-filter="filterCallback">
-						<p-dropdown [ngModel]="value" [options]="modules" (onChange)="filter($event.value)"
-							placeholder="Any" [showClear]="true">
-							<ng-template let-option pTemplate="item">
-								<span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
-							</ng-template>
-						</p-dropdown>
-					</ng-template>
-				</p-columnFilter>
         <th></th>
-
-        <p-columnFilter field="teachers" matchMode="contains" [showMenu]="false">
-          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-            <p-multiSelect [ngModel]="value" [options]="teachers" placeholder="Any"
-              (onChange)="filter($event.value)" optionLabel="name">
-              <ng-template let-option pTemplate="item">
-                <div class="p-multiselect-representative-option">
-                  <span class="p-ml-1">{{option.name}}</span>
-                </div>
-              </ng-template>
-            </p-multiSelect>
-          </ng-template>
-        </p-columnFilter>
+        <th style="padding: 0 0">
+          <p-columnFilter field="module" matchMode="equals" [showMenu]="false">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-dropdown [ngModel]="value" [options]="modules" (onChange)="filter($event.value)"
+                placeholder="Any" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                  <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                </ng-template>
+              </p-dropdown>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th style="padding: 0 0">
+          <p-columnFilter field="teachers" matchMode="contains" [showMenu]="false">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-multiSelect [ngModel]="value" [options]="teachers" placeholder="Any"
+                (onChange)="filter($event.value)" optionLabel="name">
+                <ng-template let-option pTemplate="item">
+                  <div class="p-multiselect-representative-option">
+                    <span class="p-ml-1">{{option.name}}</span>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </ng-template>
+          </p-columnFilter>
+        </th>
         <th></th>
         <th style="width: 8rem"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-course>
       <tr *ngIf="editedCourse === null || editedCourse.id !== course.id">
+        <td><a [routerLink]="course.id">{{course.name}}</a></td>
         <td>{{course.moduleText}}</td>
-        <td>{{course.name}}</td>
         <td>
           <span *ngFor="let teacher of course.teachers">{{teacher.name + '\n'}}</span>
         </td>
@@ -72,14 +71,14 @@
 
       <tr *ngIf="editedCourse !== null && editedCourse.id === course.id">
         <td>
+          <input type="text" pInputText [(ngModel)]="course.name" style="width: 100%">
+        </td>
+        <td>
           <p-dropdown #moduleDropdown [options]="modules" [(ngModel)]="editedCourse.module">
             <ng-template let-option pTemplate="item">
               <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
             </ng-template>
           </p-dropdown>
-        </td>
-        <td>
-          <input type="text" pInputText [(ngModel)]="course.name">
         </td>
         <td>
           <p-multiSelect [options]="teachers" placeholder="Any" [(ngModel)]="editedCourse.teachers"

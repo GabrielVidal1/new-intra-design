@@ -1,0 +1,56 @@
+.container {
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  .c {
+    width: 100%;
+    margin: 1em;
+  }
+
+  .logout {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+  }
+
+  .picture {
+    height: 3rem;
+    width: 3rem;
+    background: url("../../../../assets/placeholder_boy.jpg");
+    background-position: center;
+    background-size: cover;
+    background-color: white;
+    border-radius: 50%;
+    margin-top: 2rem;
+
+    position: absolute;
+    left: 0;
+  }
+}
+
+.e {
+  font-family: "locator-regular";
+
+  position: absolute;
+
+  left: 3.5rem;
+
+  font-size: 15px;
+  color: white;
+
+}
+.name {
+  top: 20px;
+}
+
+.status {
+  font-size: 14px;
+  color: #41A1DB;
+  top: 45px;
+
+
+}

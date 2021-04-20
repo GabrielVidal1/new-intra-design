@@ -1,0 +1,28 @@
+<ng-container *ngIf="user$ | async as user">
+
+  <div class="align">
+    <h1>{{editing ? 'Settings': 'Grading'}}</h1>
+    <ng-container *ngIf="user === 'admin'">
+      <button *ngIf="!editing" pButton type="button" icon="pi pi-cog" class="p-button-rounded" (click)="editing = true;"></button>
+      <button *ngIf="editing" pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-danger" (click)="editing = false;"></button>
+    </ng-container>
+  </div>
+
+  <ng-container [ngSwitch]="user">
+
+    <app-teacher-grade-view *ngSwitchCase="'teacher'"></app-teacher-grade-view>
+
+    <app-student-grade-view *ngSwitchCase="'student'"></app-student-grade-view>
+
+    <ng-container *ngSwitchCase="'admin'">
+      <app-admin-grade-view *ngIf="!editing"></app-admin-grade-view>
+      <app-admin-settings *ngIf="editing"></app-admin-settings>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      You don't have access to this page
+    </ng-container>
+
+  </ng-container>
+
+</ng-container>

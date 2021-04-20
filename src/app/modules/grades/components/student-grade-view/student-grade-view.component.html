@@ -1,0 +1,18 @@
+<div class="card">
+  <p-table [value]="grades">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="courseName">Course <p-sortIcon field="courseName"></p-sortIcon></th>
+        <th pSortableColumn="grade">Grade <p-sortIcon field="grade"></p-sortIcon></th>
+        <th pSortableColumn="average">Average <p-sortIcon field="average"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-grade>
+      <tr>
+        <td>{{grade.courseName}}</td>
+        <td>{{grade.grade === null ? 'N/A' : grade.grade}}</td>
+        <td>{{grade.average === null ? 'N/A' : grade.average}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

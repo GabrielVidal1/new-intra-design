@@ -1,0 +1,18 @@
+app-left-nav {
+  height: 100%;
+  width: 250px;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #282828; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+main {
+  right: 0%;
+  position: absolute;
+  left: 250px;
+
+  padding: 1rem;
+}

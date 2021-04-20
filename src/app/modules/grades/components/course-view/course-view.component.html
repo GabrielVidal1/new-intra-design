@@ -1,0 +1,26 @@
+<p-progressSpinner *ngIf="!course"></p-progressSpinner>
+
+<ng-container *ngIf="course">
+  <div class="align">
+    <h1>{{course.name}}</h1>
+    <p-button routerLink="../">Back</p-button>
+  </div>
+
+  <p-table [value]="grades">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="firstname">Firstname <p-sortIcon field="firstname"></p-sortIcon></th>
+        <th pSortableColumn="lastname">Lastname <p-sortIcon field="lastname"></p-sortIcon></th>
+        <th>Grade</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-grade>
+      <tr>
+        <td>{{grade.firstname}}</td>
+        <td>{{grade.lastname}}</td>
+        <td>{{grade.grade}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</ng-container>

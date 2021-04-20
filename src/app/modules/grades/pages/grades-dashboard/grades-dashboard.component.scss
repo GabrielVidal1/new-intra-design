@@ -1,0 +1,18 @@
+/*
+.p-tabview > .p-tabview-nav {
+  display:flex;
+}
+.p-tabview > .p-tabview-nav li {
+  flex: 1;
+  .p-tabview-title {
+    width: 100%;
+    text-align: center;
+  }
+}
+*/
+.align {
+  display:flex;
+  justify-content:space-between; //button with flex box
+  flex-direction: row;
+  align-items: center;
+}

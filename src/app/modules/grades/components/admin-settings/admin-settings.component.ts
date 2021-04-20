@@ -1,30 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-
-interface Course {
-  id: number,
-  module: string,
-  name: string,
-  teachers: {name: string}[],
-  coef: number,
-}
+import { Course, courses } from 'src/app/shared/data/courses';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss'],
-  providers: [MessageService, ConfirmationService]
+  selector: 'app-admin-settings',
+  templateUrl: './admin-settings.component.html',
+  styleUrls: ['./admin-settings.component.scss'],
 })
-export class CoursesComponent implements OnInit {
+export class AdminSettingsComponent implements OnInit {
 
-  courses: Course[] = [
-    { id: 1, module: 'cloud', name: 'ARCL', teachers:[{name:'Yannick Neff'}], coef: 3},
-    { id: 2, module: 'cloud', name: 'UBSI', teachers:[{name:'Jean-Christophe Ferry'},{name:'Thomas Cordival'}], coef: 1},
-    { id: 3, module: 'cloud', name: 'SOAR', teachers:[{name:'Frédéric Fourdrinier'},{name:'Yannick Neff'}], coef: 1},
-    { id: 4, module: 'management', name: 'OPCO', teachers:[{name:'Christophe Andreu'}], coef: 2},
-    { id: 5, module: 'management', name: 'AMOA', teachers:[{name:'Guillaume Barbier'}], coef: 1},
-    { id: 6, module: 'applications', name: 'ARLA', teachers:[{name:'Lucas Boisserie'},{name:'Florent Fauchille'}], coef: 2},
-  ];
+  courses: Course[] = Object.assign([], courses);
 
   modules = [
     { label: 'Cloud et Architecture', value: 'cloud' },

@@ -1,0 +1,15 @@
+<div class="container" *ngIf="user$ | async as user">
+
+  <div class="user" style="height: 6rem;">
+    <div class="picture"></div>
+    <div style="justify-content: center">
+        <p class="e name">{{user.name}}</p>
+        <p class="e status">{{user.email}}</p>
+    </div>
+  </div>
+
+  <button type="button" pButton class="c" routerLink="" routerLinkActive="active">Home</button>
+  <button type="button" pButton class="c" routerLink="grades" routerLinkActive="active">Grades</button>
+
+  <p-dropdown class="logout" [placeholder]="'Change User'" [options]="userTypes" (onChange)="changeUser($event.value)"></p-dropdown>
+</div>
