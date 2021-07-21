@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: "grades",
     loadChildren: (): Promise<any> => import('../modules/grades/grades.module').then(m => m.GradesModule)
+  },
+  {
+    path: "absences",
+    loadChildren: (): Promise<any> => import('../modules/absences/absences.module').then(m => m.AbsencesModule)
   }
 ];
 

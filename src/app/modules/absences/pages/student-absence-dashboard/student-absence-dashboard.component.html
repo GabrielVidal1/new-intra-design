@@ -1,0 +1,56 @@
+<app-schedule #schedule (clickOnEvent)="absence($event)"></app-schedule>
+<p-button label="Créer une Absence" (click)="dialog = true"></p-button>
+
+<p-dialog
+  [(visible)]="dialog"
+  header="Création d'une nouvelle absence"
+  [draggable]="false"
+  [modal]="true"
+  [closeOnEscape]="true"
+>
+
+  <div class="field">
+    <label for="time">Période</label>
+    <p-calendar
+      class="inputfield w-full"
+      id="time"
+      [(ngModel)]="rangeDates"
+      [showTime]="true"
+      inputId="time"
+      selectionMode="range"
+      appendTo="body"
+    ></p-calendar>
+  </div>
+
+  <div class="field">
+    <label for="justification">Justification</label>
+    <textarea
+      id="justification"
+      class="inputfield w-full"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [autoResize]="true"R
+    ></textarea>
+  </div>
+
+  <div class="field">
+    <label for="documents">Documents</label>
+    <p-fileUpload
+      id="documents"
+      class="inputfield w-full"
+      name="myfile[]"
+      url="./upload.php"
+    ></p-fileUpload>
+  </div>
+
+  <div class="field">
+    <p-button
+      class="inputfield w-full"
+      label="Créer l'absence"
+      (click)="createAbsence()"
+    ></p-button>
+  </div>
+
+</p-dialog>
+
