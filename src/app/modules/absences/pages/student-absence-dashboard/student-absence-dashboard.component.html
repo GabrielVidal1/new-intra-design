@@ -1,0 +1,73 @@
+<button pButton type="button" class="add-absence"
+label="Créer une Absence" (click)="dialog = true"></button>
+
+<app-schedule #schedule (clickOnEvent)="absence($event)"></app-schedule>
+
+<p-divider></p-divider>
+
+<p-panel header="Liste des absences"
+[toggleable]="true"
+>
+  <app-student-absence-table></app-student-absence-table>
+</p-panel>
+
+
+<p-dialog
+  [(visible)]="dialog"
+  header="Création d'une nouvelle absence"
+  [draggable]="false"
+  [modal]="true"
+  [closeOnEscape]="true"
+>
+  <table>
+    <tr>
+      <td>
+        <label for="time">Période</label>
+      </td>
+      <td class="form-field">
+        <p-calendar
+        id="time"
+        [(ngModel)]="rangeDates"
+        [showTime]="true"
+        inputId="time"
+        selectionMode="range"
+        appendTo="body"
+      ></p-calendar>
+      </td>
+    </tr>
+    <tr style="height: 100px;">
+      <td>
+        <label for="justification">Justification</label>
+      </td>
+      <td>
+        <textarea style="height: auto;"
+        class="form-field"
+        id="justification"
+      pInputTextarea
+    ></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="documents" class="col-fixed" style="width:100px">Documents</label>
+      </td>
+      <td>
+        <p-fileUpload
+      id="documents"
+      class="inputfield"
+      name="myfile[]"
+      url="./upload.php"
+    ></p-fileUpload>
+      </td>
+    </tr>
+    <tr>
+      <td [attr.colspan]="2" >
+        <button pButton type="button" class="b"
+        label="Créer l'absence"
+        (click)="createAbsence()"
+      ></button>
+      </td>
+  </table>
+
+
+</p-dialog>

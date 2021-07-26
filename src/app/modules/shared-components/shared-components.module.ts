@@ -8,6 +8,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {TooltipModule} from 'primeng/tooltip';
+import {PanelModule} from 'primeng/panel';
+import {DividerModule} from 'primeng/divider';
 
 @NgModule({
   declarations: [],
@@ -23,6 +26,9 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     InputTextModule,
     InputNumberModule,
     ProgressSpinnerModule,
+    TooltipModule,
+    PanelModule,
+    DividerModule,
   ],
 })
 export class SharedComponentsModule { }

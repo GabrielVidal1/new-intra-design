@@ -1,0 +1,17 @@
+<ng-container *ngIf="user$ | async as user">
+
+    <h1>Absences</h1>
+
+  <ng-container [ngSwitch]="user">
+
+    <app-student-absence-dashboard *ngSwitchCase="'student'"></app-student-absence-dashboard>
+
+    <app-admin-absence-dashboard *ngSwitchCase="'admin'"></app-admin-absence-dashboard>
+
+    <ng-container *ngSwitchDefault>
+      You don't have access to this page
+    </ng-container>
+
+  </ng-container>
+
+</ng-container>
