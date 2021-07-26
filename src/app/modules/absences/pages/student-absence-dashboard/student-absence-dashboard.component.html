@@ -1,5 +1,16 @@
+<button pButton type="button" class="add-absence"
+label="Créer une Absence" (click)="dialog = true"></button>
+
 <app-schedule #schedule (clickOnEvent)="absence($event)"></app-schedule>
-<p-button label="Créer une Absence" (click)="dialog = true"></p-button>
+
+<p-divider></p-divider>
+
+<p-panel header="Liste des absences"
+[toggleable]="true"
+>
+  <app-student-absence-table></app-student-absence-table>
+</p-panel>
+
 
 <p-dialog
   [(visible)]="dialog"
@@ -8,49 +19,55 @@
   [modal]="true"
   [closeOnEscape]="true"
 >
-
-  <div class="field">
-    <label for="time">Période</label>
-    <p-calendar
-      class="inputfield w-full"
-      id="time"
-      [(ngModel)]="rangeDates"
-      [showTime]="true"
-      inputId="time"
-      selectionMode="range"
-      appendTo="body"
-    ></p-calendar>
-  </div>
-
-  <div class="field">
-    <label for="justification">Justification</label>
-    <textarea
-      id="justification"
-      class="inputfield w-full"
-      rows="5"
-      cols="30"
+  <table>
+    <tr>
+      <td>
+        <label for="time">Période</label>
+      </td>
+      <td class="form-field">
+        <p-calendar
+        id="time"
+        [(ngModel)]="rangeDates"
+        [showTime]="true"
+        inputId="time"
+        selectionMode="range"
+        appendTo="body"
+      ></p-calendar>
+      </td>
+    </tr>
+    <tr style="height: 100px;">
+      <td>
+        <label for="justification">Justification</label>
+      </td>
+      <td>
+        <textarea style="height: auto;"
+        class="form-field"
+        id="justification"
       pInputTextarea
-      [autoResize]="true"R
     ></textarea>
-  </div>
-
-  <div class="field">
-    <label for="documents">Documents</label>
-    <p-fileUpload
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="documents" class="col-fixed" style="width:100px">Documents</label>
+      </td>
+      <td>
+        <p-fileUpload
       id="documents"
-      class="inputfield w-full"
+      class="inputfield"
       name="myfile[]"
       url="./upload.php"
     ></p-fileUpload>
-  </div>
+      </td>
+    </tr>
+    <tr>
+      <td [attr.colspan]="2" >
+        <button pButton type="button" class="b"
+        label="Créer l'absence"
+        (click)="createAbsence()"
+      ></button>
+      </td>
+  </table>
 
-  <div class="field">
-    <p-button
-      class="inputfield w-full"
-      label="Créer l'absence"
-      (click)="createAbsence()"
-    ></p-button>
-  </div>
 
 </p-dialog>
-

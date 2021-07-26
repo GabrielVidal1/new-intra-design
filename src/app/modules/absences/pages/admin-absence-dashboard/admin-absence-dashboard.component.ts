@@ -104,7 +104,6 @@ export class AdminAbsenceDashboardComponent implements OnInit {
   ];
 
   absencesStatus: {status: AbsenceStatus, name: string}[] = [
-    { status: 'new', name: 'Nouvelle' },
     { status: 'pending', name: 'Vue' },
     { status: 'accepted', name: 'Acceptée' },
     { status: 'refused', name: 'Refusée' },

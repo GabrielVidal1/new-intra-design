@@ -95,7 +95,10 @@
                     {{absence.student.name}}
                 </a>
             </td>
-            <td>{{absence.startDate | date: 'short'}} - {{absence.endDate | date: 'short'}}</td>
+            <td>
+                <p>{{absence.startDate | date: 'short'}}</p>
+                <p>{{absence.endDate | date: 'short'}}</p>
+            </td>
             <td>
                 <i *ngIf="absence.justification === ''">Pas de justification</i>
                 <p *ngIf="absence.justification !== ''">{{absence.justification}}</p>

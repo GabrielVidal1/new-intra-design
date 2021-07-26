@@ -1,5 +1,3 @@
-<h1>Absences de Jean Bono</h1>
-
 <p-table [value]="absences"
     [loading]="state === 'loading'"
 >
@@ -14,11 +12,11 @@
     <ng-template pTemplate="body" let-absence>
         <tr>
             <td style="width: 160px;" [ngClass]="{
-                'accepted': absence.status === 'accepted',
-                'refused': absence.status === 'refused',
-                'new': absence.status === 'new'
+                'accepted': absence.status === 'Acceptée',
+                'refused': absence.status === 'Refusée',
+                'new': absence.status === 'Nouvelle'
             }">
-                <p-dropdown [options]="absencesStatus" [ngModel]="absence.status" optionLabel="name" optionValue="status"></p-dropdown>
+                {{ absence.status }}    
             </td>
             <td>
                 <p>{{absence.startDate | date: 'short'}}</p>

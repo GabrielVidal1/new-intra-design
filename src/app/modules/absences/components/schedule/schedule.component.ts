@@ -3,6 +3,7 @@ import { FullCalendarComponent, CalendarOptions, EventClickArg } from '@fullcale
 import { courseData } from 'src/app/shared/data/calendarData';
 
 export interface Seance {
+  name: string,
   start: Date,
   end: Date,
 }
@@ -42,6 +43,7 @@ export class ScheduleComponent implements OnInit {
 
     this.calendarOptions.eventClick = (event: EventClickArg) => {
       this.clickOnEvent.emit({
+        name: event.event.title,
         start: event.event.start ?? new Date(),
         end: event.event.end ?? new Date()
       })

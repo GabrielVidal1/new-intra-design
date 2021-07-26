@@ -16,6 +16,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { AdminAbsenceDashboardComponent } from './pages/admin-absence-dashboard/admin-absence-dashboard.component';
 import { StudentAbsencesComponent } from './pages/student-absences/student-absences.component';
+import { StudentAbsenceTableComponent } from './components/student-absence-table/student-absence-table.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -30,6 +31,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ScheduleComponent,
     AdminAbsenceDashboardComponent,
     StudentAbsencesComponent,
+    StudentAbsenceTableComponent,
   ],
   imports: [
     CommonModule,

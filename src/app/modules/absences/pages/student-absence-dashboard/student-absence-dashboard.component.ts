@@ -13,7 +13,7 @@ export class StudentAbsenceDashboardComponent implements OnInit {
 
   dialog = false;
 
-  rangeDates: Date[] = [];
+  rangeDates: Date[] = [new Date(), new Date()];
 
   constructor(private messageService: MessageService) { }
 
@@ -21,6 +21,7 @@ export class StudentAbsenceDashboardComponent implements OnInit {
   }
 
   absence(seance: Seance): void {
+    if (seance.name === 'Absence') return;
     this.dialog = true;
 
     this.rangeDates = [seance.start, seance.end];
