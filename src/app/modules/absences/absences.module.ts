@@ -14,6 +14,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { AdminAbsenceDashboardComponent } from './pages/admin-absence-dashboard/admin-absence-dashboard.component';
+import { StudentAbsencesComponent } from './pages/student-absences/student-absences.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -26,6 +28,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AbsencesDashboardComponent,
     StudentAbsenceDashboardComponent,
     ScheduleComponent,
+    AdminAbsenceDashboardComponent,
+    StudentAbsencesComponent,
   ],
   imports: [
     CommonModule,

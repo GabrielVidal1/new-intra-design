@@ -30,7 +30,7 @@ export class LeftNavComponent implements OnInit {
   constructor(private userDatasourceService: UserDatasourceService) { }
 
   ngOnInit(): void {
-    this.userDatasourceService.user$.next('student');
+    this.userDatasourceService.user$.next('admin');
   }
 
   changeUser(value: UserType) {

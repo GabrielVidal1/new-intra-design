@@ -1,0 +1,136 @@
+
+
+<p-panel header="Nouvelles Absences">
+
+    <p class="no-absences"
+    *ngIf="newAbsences.length === 0 && state === 'ready'">
+        Pas ne nouvelles absences
+    </p>
+
+    <p-table *ngIf="newAbsences.length > 0"
+        [value]="newAbsences"
+        [loading]="state === 'loading'"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Etudiant</th>
+                <th>Date</th>
+                <th>Justification</th>
+                <th>Documents</th>
+                <th>Status</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-absence>
+            <tr>
+                <td>
+                    <a [routerLink]="[absence.student.login]">
+                        {{absence.student.name}}
+                    </a>
+                </td>
+                <td>
+                    <p>{{absence.startDate | date: 'short'}}</p>
+                    <p>{{absence.endDate | date: 'short'}}</p>
+                </td>
+                <td>{{absence.justification}}</td>
+                <td>
+                    <p-button *ngIf="absence.documents" label="Documents"
+                        (click)="documents = true;"
+                    ></p-button>
+                    <i *ngIf="!absence.documents">Pas de documents</i>
+                </td>
+                <td>
+                    <button 
+                    pButton pRipple type="button" icon="pi pi-eye" class="r-button p-button-rounded"
+                    pTooltip="Marquer comme vu" 
+                    tooltipPosition="top"
+                    (click)="processAbsence(absence.id, 'pending')"
+                    ></button>
+                    <button pButton pRipple type="button" icon="pi pi-check" class="r-button p-button-rounded p-button-success"
+                    pTooltip="Accepter" 
+                    tooltipPosition="top"
+                    (click)="processAbsence(absence.id, 'accepted')"
+                    ></button>
+                    <button pButton pRipple type="button" icon="pi pi-times" class="r-button p-button-rounded p-button-danger"
+                    pTooltip="refuser" 
+                    tooltipPosition="top"
+                    (click)="processAbsence(absence.id, 'refused')"
+                    ></button>
+
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>
+
+<p-divider></p-divider>
+
+<p-panel header="Absences"
+[toggleable]="true"
+[collapsed]="true"
+>
+
+<p-table [value]="viewedAbences"
+    [loading]="state === 'loading'"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 160px;">Status</th>
+            <th>Etudiant</th>
+            <th>Date</th>
+            <th>Justification</th>
+            <th>Documents</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-absence>
+        <tr>
+            <td style="width: 160px;" [ngClass]="{
+                'accepted': absence.status === 'accepted',
+                'refused': absence.status === 'refused',
+                'new': absence.status === 'new'
+            }">
+                <p-dropdown [options]="absencesStatus" [ngModel]="absence.status" optionLabel="name" optionValue="status"></p-dropdown>
+            </td>
+            <td>
+                <a [routerLink]="[absence.student.login]">
+                    {{absence.student.name}}
+                </a>
+            </td>
+            <td>{{absence.startDate | date: 'short'}} - {{absence.endDate | date: 'short'}}</td>
+            <td>
+                <i *ngIf="absence.justification === ''">Pas de justification</i>
+                <p *ngIf="absence.justification !== ''">{{absence.justification}}</p>
+            </td>
+            <td>
+                <p-button *ngIf="absence.documents" label="Documents"
+                (click)="documents = true;"
+                ></p-button>
+                <i *ngIf="!absence.documents">Pas de documents</i>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</p-panel>
+
+<p-dialog header="Documents" [(visible)]="documents"
+[modal]="true"
+[draggable]="false"
+[style]="{width: '50vw'}"
+>
+    <p-table [value]="['Arrêt_maladie.pdf', 'Justificatif de décès pépé.pdf']">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 10rem;">Nom du document</th>
+                <th style="width: 3rem;"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-document>
+            <tr>
+                <td style="width: 10rem;">{{document}}</td>
+                <td style="width: 3rem;">
+                    <p-button label="Ouvrir document"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</p-dialog>

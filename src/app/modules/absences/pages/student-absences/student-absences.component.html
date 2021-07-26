@@ -1,0 +1,68 @@
+<h1>Absences de Jean Bono</h1>
+
+<p-table [value]="absences"
+    [loading]="state === 'loading'"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 160px;">Status</th>
+            <th>Date</th>
+            <th>Justification</th>
+            <th>Documents</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-absence>
+        <tr>
+            <td style="width: 160px;" [ngClass]="{
+                'accepted': absence.status === 'accepted',
+                'refused': absence.status === 'refused',
+                'new': absence.status === 'new'
+            }">
+                <p-dropdown [options]="absencesStatus" [ngModel]="absence.status" optionLabel="name" optionValue="status"></p-dropdown>
+            </td>
+            <td>
+                <p>{{absence.startDate | date: 'short'}}</p>
+                <p>{{absence.endDate | date: 'short'}}</p>
+            </td>
+            <td>
+                <i *ngIf="absence.justification === ''">Pas de justification</i>
+                <p *ngIf="absence.justification !== ''">{{absence.justification}}</p>
+            </td>
+            <td>
+                <p-button *ngIf="absence.documents" label="Documents"
+                (click)="documents = true;"
+                ></p-button>
+                <i *ngIf="!absence.documents">Pas de documents</i>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            {{absences.length}} Absence{{absences.length > 1 ? 's' : ''}} au total
+        </div>
+    </ng-template>
+</p-table>
+
+<p-dialog header="Documents" [(visible)]="documents"
+[modal]="true"
+[draggable]="false"
+[style]="{width: '50vw'}"
+>
+    <p-table [value]="['Arrêt_maladie.pdf', 'Justificatif de décès pépé.pdf']">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 10rem;">Nom du document</th>
+                <th style="width: 3rem;"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-document>
+            <tr>
+                <td style="width: 10rem;">{{document}}</td>
+                <td style="width: 3rem;">
+                    <p-button label="Ouvrir document"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</p-dialog>

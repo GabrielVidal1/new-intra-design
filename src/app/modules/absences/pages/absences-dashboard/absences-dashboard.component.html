@@ -6,11 +6,7 @@
 
     <app-student-absence-dashboard *ngSwitchCase="'student'"></app-student-absence-dashboard>
 
-    <ng-container *ngSwitchCase="'admin'">
-
-      ADMIN
-
-    </ng-container>
+    <app-admin-absence-dashboard *ngSwitchCase="'admin'"></app-admin-absence-dashboard>
 
     <ng-container *ngSwitchDefault>
       You don't have access to this page
